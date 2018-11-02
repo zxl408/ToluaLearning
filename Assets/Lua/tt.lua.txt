@@ -1,0 +1,10 @@
+
+local GameObject = UnityEngine.GameObject
+
+local   ParticleSystem =UnityEngine.ParticleSystem
+local go = GameObject('go')
+go:AddComponent(typeof(ParticleSystem))
+---@type UnityEngine.Transform
+local t
+
+UnityEngine.GameObject('dd')
