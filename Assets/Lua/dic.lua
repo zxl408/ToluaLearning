@@ -1,5 +1,7 @@
----@param dic System.Collections.Generic.Dictionary_2_TKey_TValue_
+---@param dic System_Collections_Generic_KeyValuePair_int_TestAccountWrap
 function foo(dic)
+
+    print(getmetatable(dic))
     local it= dic:GetEnumerator()
     while it:MoveNext() do
         local v = it.Current.Value

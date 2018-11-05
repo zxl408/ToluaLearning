@@ -41,7 +41,7 @@ public class LuaClient : MonoBehaviour
     protected LuaLooper loop = null;
     protected LuaFunction levelLoaded = null;
 
-    protected bool openLuaSocket = false;
+    protected bool openLuaSocket = true;
     protected bool beZbStart = false;
 
     protected virtual LuaFileUtils InitLoader()
