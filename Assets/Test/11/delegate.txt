@@ -1,0 +1,40 @@
+lua调用c#事件:
+1.首先到"[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]"标记的函数. 2.然后通过ToLua.CheckDelegate方法创建事件
+3.分为函数和事件两种方式创建,创建函数跟开始注册时"DelegateTraits"有关 函数: DelegateTraits<T>.Create(func); 
+事件: (Delegate)ToLua.CheckObject(L, stackPos, typeof(T));
+ )
+
+4.DelegateTraits<T>.Create(func); 回到wrap类里去找注册的相应方法如:
+"
+  //自动生成代码后拷贝过来
+    class TestEventListener_OnClick_Event : LuaDelegate
+    {
+        public TestEventListener_OnClick_Event(LuaFunction func) : base(func) { }
+
+        public void Call(UnityEngine.GameObject param0)
+        {
+            func.BeginPCall();
+            func.Push(param0);
+            func.PCall();
+            func.EndPCall();
+        }
+    }
+
+ public static TestEventListener.OnClick TestEventListener_OnClick(LuaFunction func, LuaTable self, bool flag)
+    {
+        if (func == null)
+        {
+            TestEventListener.OnClick fn = delegate { };
+            return fn;
+        }
+
+        TestEventListener_OnClick_Event target = new TestEventListener_OnClick_Event(func);
+        TestEventListener.OnClick d = target.Call;
+        target.method = d.Method;
+        return d;
+    }
+
+
+    "
+创建对应的C#里的事件
+5.

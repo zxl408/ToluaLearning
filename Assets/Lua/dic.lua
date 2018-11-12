@@ -1,4 +1,4 @@
----@param dic System_Collections_Generic_KeyValuePair_int_TestAccountWrap
+---@param dic System.Collections.Generic.Dictionary_2_TKey_TValue_
 function foo(dic)
 
     print(getmetatable(dic))
@@ -7,6 +7,7 @@ function foo(dic)
         local v = it.Current.Value
         print("id: "..v.id.."name: "..v.name.."sex: "..v.sex)
     end
+    ---@type TestAccount
     local value
     isOk,value = dic:TryGetValue(1,nil)
     if isOk then

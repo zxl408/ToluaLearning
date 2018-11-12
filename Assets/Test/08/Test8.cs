@@ -4,12 +4,12 @@ using UnityEngine;
 using LuaInterface;
 public class Test8 : MonoBehaviour {
     LuaState lua;
-    public TextAsset asset;
+    public string assetName;
 	// Use this for initialization
 	void Start () {
         lua = new LuaState();
         lua.Start();
-        lua.DoString(asset.text,"Test8.cs");
+        lua.DoFile(assetName);
         var fun = lua.GetFunction("foo");
         int[] array = new int[] { 1, 3, 5, 7, 9 };
         fun.BeginPCall();

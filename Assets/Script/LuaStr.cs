@@ -24,8 +24,9 @@ public class LuaStr : LuaClient {
     public string luaFile;
 	// Use this for initialization
 	void Start () {
-
-      
+        //float a = 0;
+        //var dg = DG.Tweening.DOTween.To(() => a, (r) => { transform.position = new Vector3(0, r, 0); }, 100, 10);
+        
     }
 
     private void Update()
