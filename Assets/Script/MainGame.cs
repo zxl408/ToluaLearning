@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MainGame : MonoBehaviour {
     public GameObject luaGo;
-	// Use this for initialization
-	void Start () {
+    NewTestEventListener listener;
+    private void Awake()
+    {
+        listener= gameObject.AddComponent<NewTestEventListener>();
+    }
+    // Use this for initialization
+    void Start () {
         (luaGo).AddComponent<LuaBaseBehaviour>().Init("luabehaviour");
 	}
 	
@@ -13,4 +18,14 @@ public class MainGame : MonoBehaviour {
 	void Update () {
 		
 	}
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(20, 20, 80, 50), "clcik main")) {
+            listener.OnClickEvent(gameObject);
+        }
+        if (GUI.Button(new Rect(20, 80, 80, 50), "clcik behaviour"))
+        {
+            listener.OnClickEvent(luaGo);
+        }
+    }
 }

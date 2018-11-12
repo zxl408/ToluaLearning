@@ -1,25 +1,55 @@
 luabehaviour={}
----@param gameObject UnityEngine.GameObject
-function luabehaviour:New(gameObject)
+---@type LuaBaseBehaviour
+local go
+---@type TestEventListener
+local listener
+---@type System.Collections.Generic.Dictionary_2_TKey_TValue_
+local dc
+
+
+---@param this LuaBaseBehaviour
+function luabehaviour:New(this)
     local o = {}
     setmetatable(o,self)
     self.__index= self
-    o.gameObject = gameObject
-    print(o.gameObject.name,'New')
+    o.this = this
+    o.dc =
+    print(o.this.name,'New')
     return o
 end
 function luabehaviour:Awake()
-    print( self.gameObject.name,'Awake')
+    print( self.this.name,'Awake')
+
+    go = UnityEngine.GameObject.Find('Main Camera')
+    print(go.name)
+    local type =typeof(NewTestEventListener)
+    print(type)
+    ---@type TestEventListener
+    listener= go:GetComponent(type)
+    print(listener.name)
+    listener.onClickEvent= listener.onClickEvent+luabehaviour.OnStaticClick
 end
 function luabehaviour:Start()
-    print(self.gameObject.name,'Start')
+    print(self.this.name,'Start')
 end
 function luabehaviour:OnEnable()
-    print(self.gameObject.name,'OnEnable')
+    print(self.this.name,'OnEnable')
 end
 function luabehaviour:OnDisable()
-    print(self.gameObject.name,'OnDisable')
+    listener.onClickEvent= listener.onClickEvent-luabehaviour.OnStaticClick
+    print(self.this.name,'OnDisable')
 end
 function luabehaviour:Update()
-    print(self.gameObject.name,'Update')
+    print(self.this.name,'Update')
+end
+---@param go UnityEngine.GameObject
+function luabehaviour:OnClick(go)
+    print( self. go.name)
+end
+---@param go UnityEngine.GameObject
+function luabehaviour.OnStaticClick(go)
+    if(go == ) then
+        OnClick(go)
+        print('click self')
+    end
 end

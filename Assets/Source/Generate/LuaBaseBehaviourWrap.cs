@@ -11,8 +11,10 @@ public class LuaBaseBehaviourWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("luaClass", get_luaClass, set_luaClass);
+		L.RegVar("luaObj", get_luaObj, set_luaObj);
 		L.RegVar("className", get_className, set_className);
 		L.RegVar("enableUpdateFunc", get_enableUpdateFunc, set_enableUpdateFunc);
+		L.RegVar("isInit", get_isInit, null);
 		L.EndClass();
 	}
 
@@ -60,13 +62,32 @@ public class LuaBaseBehaviourWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			LuaBaseBehaviour obj = (LuaBaseBehaviour)o;
-			LuaInterface.LuaTable ret = obj.luaObj;
+			LuaInterface.LuaTable ret = obj.luaClass;
 			ToLua.Push(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index luaClass on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_luaObj(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaBaseBehaviour obj = (LuaBaseBehaviour)o;
+			LuaInterface.LuaTable ret = obj.luaObj;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index luaObj on a nil value");
 		}
 	}
 
@@ -109,7 +130,45 @@ public class LuaBaseBehaviourWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isInit(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaBaseBehaviour obj = (LuaBaseBehaviour)o;
+			bool ret = obj.isInit;
+			LuaDLL.lua_pushboolean(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isInit on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_luaClass(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			LuaBaseBehaviour obj = (LuaBaseBehaviour)o;
+			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
+			obj.luaClass = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index luaClass on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_luaObj(IntPtr L)
 	{
 		object o = null;
 
@@ -123,7 +182,7 @@ public class LuaBaseBehaviourWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o, "attempt to index luaClass on a nil value");
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index luaObj on a nil value");
 		}
 	}
 

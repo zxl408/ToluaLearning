@@ -47,7 +47,7 @@ public class LuaBaseBehaviour : MonoBehaviour
         {
             newFunc.BeginPCall();
             newFunc.Push(luaClass);
-            newFunc.Push(gameObject);
+            newFunc.Push(this);
             newFunc.PCall();
             luaObj = newFunc.CheckLuaTable();
             newFunc.EndPCall();
