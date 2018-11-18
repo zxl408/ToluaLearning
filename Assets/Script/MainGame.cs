@@ -11,7 +11,7 @@ public class MainGame : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        (luaGo).AddComponent<LuaBaseBehaviour>().Init("luabehaviour");
+        (luaGo).AddComponent<LuaBaseBehaviour>().Init("gggq");
 	}
 	
 	// Update is called once per frame

@@ -1,23 +1,19 @@
-luabehaviour={}
+local behaviour={}
 ---@type LuaBaseBehaviour
 local go
 ---@type TestEventListener
 local listener
----@type System.Collections.Generic.Dictionary_2_TKey_TValue_
-local dc
-
 
 ---@param this LuaBaseBehaviour
-function luabehaviour:New(this)
+function behaviour:New(this)
     local o = {}
     setmetatable(o,self)
     self.__index= self
     o.this = this
-    o.dc =
     print(o.this.name,'New')
     return o
 end
-function luabehaviour:Awake()
+function behaviour:Awake()
     print( self.this.name,'Awake')
 
     go = UnityEngine.GameObject.Find('Main Camera')
@@ -27,29 +23,49 @@ function luabehaviour:Awake()
     ---@type TestEventListener
     listener= go:GetComponent(type)
     print(listener.name)
-    listener.onClickEvent= listener.onClickEvent+luabehaviour.OnStaticClick
+    listener.onClickEvent= listener.onClickEvent+behaviour.OnStaticClick
 end
-function luabehaviour:Start()
+function behaviour:Start()
     print(self.this.name,'Start')
 end
-function luabehaviour:OnEnable()
+function behaviour:OnEnable()
     print(self.this.name,'OnEnable')
 end
-function luabehaviour:OnDisable()
-    listener.onClickEvent= listener.onClickEvent-luabehaviour.OnStaticClick
+function behaviour:OnDisable()
+    listener.onClickEvent= listener.onClickEvent-behaviour.OnStaticClick
     print(self.this.name,'OnDisable')
 end
-function luabehaviour:Update()
+function behaviour:Update()
     print(self.this.name,'Update')
 end
 ---@param go UnityEngine.GameObject
-function luabehaviour:OnClick(go)
-    print( self. go.name)
-end
----@param go UnityEngine.GameObject
-function luabehaviour.OnStaticClick(go)
-    if(go == ) then
-        OnClick(go)
-        print('click self')
+function behaviour:GetBehaviour(go)
+    ---@type LuaBaseBehaviour
+    local behaivor= go:GetComponent(typeof(LuaBaseBehaviour))
+    if( behaivor ~= nil and behaivor.luaObj~=nil) then
+        return behaivor
+    else
+        return nil
     end
 end
+
+---@param go UnityEngine.GameObject
+function behaviour:OnClick(go)
+    print( self.this.name, go.name)
+end
+---@param go UnityEngine.GameObject
+function behaviour.OnStaticClick(go)
+    ---@type LuaBaseBehaviour
+    local behaivor = behaviour:GetBehaviour(go)
+    if( behaivor ~= nil ) then
+        behaviour.OnClick(behaivor.luaObj,go)
+        print('click self')
+    else
+        print('click '..go.name)
+    end
+end
+---@class behaviour
+
+Luabehaviour = behaviour
+setmetatable(behaviour,behaviour)
+return behaviour

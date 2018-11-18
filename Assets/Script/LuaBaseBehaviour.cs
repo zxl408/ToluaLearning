@@ -42,6 +42,7 @@ public class LuaBaseBehaviour : MonoBehaviour
         luaState.Require(className);
 
         var luaClass = luaState.GetTable(className);
+
         newFunc = luaClass.GetLuaFunction("New");
         if (newFunc != null)
         {
@@ -52,22 +53,22 @@ public class LuaBaseBehaviour : MonoBehaviour
             luaObj = newFunc.CheckLuaTable();
             newFunc.EndPCall();
         }
-
+     
         if (luaObj != null)
             isInit = true;
         print("Init");
         if (isInit)
         {
             if (awakeFunc == null)
-                awakeFunc = luaClass.GetLuaFunction("Awake");
+                awakeFunc = luaObj.GetLuaFunction("Awake");
             if (startFunc == null)
-                startFunc = luaClass.GetLuaFunction("Start");
+                startFunc = luaObj.GetLuaFunction("Start");
             if (enableFunc == null)
-                enableFunc = luaClass.GetLuaFunction("OnEnable");
+                enableFunc = luaObj.GetLuaFunction("OnEnable");
             if (disableFunc == null)
-                disableFunc = luaClass.GetLuaFunction("OnDisable");
+                disableFunc = luaObj.GetLuaFunction("OnDisable");
             if (updateFunc == null)
-                updateFunc = luaClass.GetLuaFunction("Update");
+                updateFunc = luaObj.GetLuaFunction("Update");
 
             if (isActiveAndEnabled)
             {
@@ -108,7 +109,10 @@ public class LuaBaseBehaviour : MonoBehaviour
     }
     private void OnDestroy()
     {
-        luaObj.Dispose();
-        luaObj = null;
+        if (luaObj != null)
+        {
+            luaObj.Dispose();
+            luaObj = null;
+        }
     }
 }
