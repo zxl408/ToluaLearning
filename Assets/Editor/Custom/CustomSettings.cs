@@ -17,7 +17,7 @@ public static class CustomSettings
     //导出时强制做为静态类的类型(注意customTypeList 还要添加这个类型才能导出)
     //unity 有些类作为sealed class, 其实完全等价于静态类
     public static List<Type> staticClassTypes = new List<Type>
-    {
+    {       
         typeof(UnityEngine.Application),
         typeof(UnityEngine.Time),
         typeof(UnityEngine.Screen),
@@ -154,8 +154,10 @@ public static class CustomSettings
         _GT(typeof(LuaProfiler)),
         _GT(typeof(LuaBaseBehaviour)),
         _GT(typeof(NewTestEventListener)),
-        _GT(typeof(TestLuaEnum))
-                  
+        _GT(typeof(TestLuaEnum)),
+        _GT(typeof(TestClassA)),      
+        _GT(typeof(UnityEngine.Resources))
+
     };
 
     public static List<Type> dynamicList = new List<Type>()

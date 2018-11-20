@@ -35,8 +35,11 @@ function behaviour:OnDisable()
     listener.onClickEvent= listener.onClickEvent-behaviour.OnStaticClick
     print(self.this.name,'OnDisable')
 end
+function behaviour:OnDestroy()
+    print(self.this .name,'OnDestroy')
+end
 function behaviour:Update()
-    print(self.this.name,'Update')
+    --print(self.this.name,'Update')
 end
 ---@param go UnityEngine.GameObject
 function behaviour:GetBehaviour(go)
@@ -64,8 +67,9 @@ function behaviour.OnStaticClick(go)
         print('click '..go.name)
     end
 end
----@class behaviour
 
+
+---@class behaviour
 Luabehaviour = behaviour
 setmetatable(behaviour,behaviour)
 return behaviour

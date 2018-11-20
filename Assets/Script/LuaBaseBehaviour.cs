@@ -14,7 +14,7 @@ public class LuaBaseBehaviour : MonoBehaviour
     {
         get
         {
-            return LuaManager.Instance.luaState;
+            return ((LuaManager)LuaManager.Instance).LuaState;
         }
     }
     static LuaFunction newFunc;
@@ -22,6 +22,7 @@ public class LuaBaseBehaviour : MonoBehaviour
     static LuaFunction startFunc;
     static LuaFunction enableFunc;
     static LuaFunction disableFunc;
+    static LuaFunction destroyFunc;
     static LuaFunction updateFunc;
     public bool enableUpdateFunc = false;
     public bool isInit
@@ -32,9 +33,8 @@ public class LuaBaseBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        if (isInit)
+        if (isInit && awakeFunc != null)
             awakeFunc.Call(luaObj);
-        print("Awake");
     }
     public void Init(string className)
     {
@@ -53,10 +53,9 @@ public class LuaBaseBehaviour : MonoBehaviour
             luaObj = newFunc.CheckLuaTable();
             newFunc.EndPCall();
         }
-     
+
         if (luaObj != null)
             isInit = true;
-        print("Init");
         if (isInit)
         {
             if (awakeFunc == null)
@@ -67,13 +66,17 @@ public class LuaBaseBehaviour : MonoBehaviour
                 enableFunc = luaObj.GetLuaFunction("OnEnable");
             if (disableFunc == null)
                 disableFunc = luaObj.GetLuaFunction("OnDisable");
+            if (destroyFunc == null)
+                destroyFunc = luaObj.GetLuaFunction("OnDestroy");
             if (updateFunc == null)
                 updateFunc = luaObj.GetLuaFunction("Update");
 
             if (isActiveAndEnabled)
             {
-                awakeFunc.Call(luaObj);
-                enableFunc.Call(luaObj);
+                if (awakeFunc != null)
+                    awakeFunc.Call(luaObj);
+                if (enableFunc != null)
+                    enableFunc.Call(luaObj);
             }
 
         }
@@ -83,36 +86,47 @@ public class LuaBaseBehaviour : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
-        print("Start");
-        if (isInit)
+    { 
+        if (isInit && startFunc != null)
             startFunc.Call(luaObj);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isInit && enableUpdateFunc)
+        if (isInit && enableUpdateFunc && updateFunc != null)
             updateFunc.Call(luaObj);
     }
     private void OnEnable()
-    {
-        print("OnEnable");
-        if (isInit)
+    { 
+        if (isInit && enableFunc != null)
             enableFunc.Call(luaObj);
     }
     private void OnDisable()
-    {
-        print("OnDisable");
-        if (isInit)
+    {      
+        if (isInit && disableFunc != null)
             disableFunc.Call(luaObj);
     }
     private void OnDestroy()
     {
         if (luaObj != null)
-        {
+        {         
+            if (isInit && destroyFunc != null)
+                destroyFunc.Call(luaObj);
             luaObj.Dispose();
             luaObj = null;
+            awakeFunc.Dispose();
+            awakeFunc = null;
+            startFunc.Dispose();
+            startFunc = null;
+            enableFunc.Dispose();
+            enableFunc = null;
+            disableFunc.Dispose();
+            disableFunc = null;
+            destroyFunc.Dispose();
+            destroyFunc = null;
+            updateFunc.Dispose();
+            updateFunc = null; 
         }
     }
 }
