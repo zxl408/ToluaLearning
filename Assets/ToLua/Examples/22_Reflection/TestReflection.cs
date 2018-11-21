@@ -23,6 +23,7 @@ public class TestReflection : LuaClient
         func:Call()        
         func:Destroy()
         func = nil
+   
         
         local objs = {Vector3.one, Vector3.zero}
         local array = tolua.toarray(objs, typeof(Vector3))
@@ -80,7 +81,7 @@ public class TestReflection : LuaClient
 
     void TestAction()
     {
-        Debugger.Log("Test Action");
+        Debugger.Log("Test Action");       
     }
 
     protected override void OnLoadFinished()
