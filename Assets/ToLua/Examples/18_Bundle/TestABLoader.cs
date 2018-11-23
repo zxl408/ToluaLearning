@@ -53,7 +53,9 @@ public class TestABLoader : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
         string main = streamingPath + "/" + LuaConst.osDir + "/" + LuaConst.osDir;
 #else
-        string main = "file:///" + streamingPath + "/" + LuaConst.osDir + "/" + LuaConst.osDir;
+        // Uri uri = new Uri(Path.Combine(Path.Combine(Path.Combine(Application.streamingAssetsPath, streamingPath), LuaConst.osDir), LuaConst.osDir));
+        // string main = uri.AbsoluteUri;
+        string main =  "file:///" + streamingPath + "/" + LuaConst.osDir + "/" + LuaConst.osDir;
 #endif
         WWW www = new WWW(main);
         yield return www;
@@ -119,10 +121,20 @@ public class TestABLoader : MonoBehaviour
         Application.RegisterLogCallback(null);
 #endif
     }
-
+    protected void OpenLuaSocket()
+    {
+       
+    }
     void OnBundleLoad()
     {                
         LuaState state = new LuaState();
+        LuaConst.openLuaSocket = true;
+
+        state.BeginPreLoad();
+        state.RegFunction("socket.core", LuaOpen_Socket_Core);
+        state.RegFunction("mime.core", LuaOpen_Mime_Core);
+        state.EndPreLoad();
+
         state.Start();
         state.DoString("print('hello tolua#:'..tostring(Vector3.zero))");
         state.DoFile("Main.lua");
@@ -131,5 +143,18 @@ public class TestABLoader : MonoBehaviour
         func.Dispose();
         state.Dispose();
         state = null;
-	}	
+	}
+
+    [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+    static int LuaOpen_Socket_Core(IntPtr L)
+    {
+        return LuaDLL.luaopen_socket_core(L);
+    }
+
+    [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+    static int LuaOpen_Mime_Core(IntPtr L)
+    {
+        return LuaDLL.luaopen_mime_core(L);
+    }
+
 }
