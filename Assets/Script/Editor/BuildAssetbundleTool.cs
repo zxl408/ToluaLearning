@@ -20,7 +20,13 @@ public class BuildAssetbundleTool
     [MenuItem("BuildAssetBundleTool/Build")]
     public static void Build()
     {
-        var targetDirectroy = Path.Combine(bundleTempDirectory, osDir);
+        Build(BuildAssetBundleOptions.None);
+        Build(BuildAssetBundleOptions.UncompressedAssetBundle);
+        Build(BuildAssetBundleOptions.ChunkBasedCompression);
+    }
+    public static void Build(BuildAssetBundleOptions options) {
+        var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir),options.ToString());
+      
         if (!Directory.Exists(bundleTempDirectory))
         {
             Directory.CreateDirectory(bundleTempDirectory);
@@ -33,11 +39,8 @@ public class BuildAssetbundleTool
         }
         CleanAllDestDir(targetDirectroy);
         MarkBundleNames(Path.Combine(Application.dataPath, "Game/Res"));
-        BuildAssetBundleOptions options = BuildAssetBundleOptions.None;
-        //BuildAssetBundleOptions options = BuildAssetBundleOptions.UncompressedAssetBundle;
-        //BuildAssetBundleOptions options = BuildAssetBundleOptions.ChunkBasedCompression;
-        BuildPipeline.BuildAssetBundles(targetDirectroy,options, EditorUserBuildSettings.activeBuildTarget);
-     
+       
+        BuildPipeline.BuildAssetBundles(targetDirectroy, options, EditorUserBuildSettings.activeBuildTarget);
     }
     //[MenuItem("GameObject/CreateGo %left u")]
     //static void CreateGo()
