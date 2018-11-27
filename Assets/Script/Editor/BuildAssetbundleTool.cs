@@ -20,13 +20,23 @@ public class BuildAssetbundleTool
     [MenuItem("BuildAssetBundleTool/Build")]
     public static void Build()
     {
-        Build(BuildAssetBundleOptions.None);
-        Build(BuildAssetBundleOptions.UncompressedAssetBundle);
-        Build(BuildAssetBundleOptions.ChunkBasedCompression);
+        var origin = Path.Combine(Application.dataPath, "Game/Res");
+        var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.None.ToString());
+        Build(BuildAssetBundleOptions.None, origin, targetDirectroy);
+        targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.UncompressedAssetBundle.ToString());
+        Build(BuildAssetBundleOptions.UncompressedAssetBundle, origin, targetDirectroy);
+        targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.ChunkBasedCompression.ToString());
+        Build(BuildAssetBundleOptions.ChunkBasedCompression, origin, targetDirectroy);
     }
-    public static void Build(BuildAssetBundleOptions options) {
-        var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir),options.ToString());
-      
+
+    [MenuItem("BuildAssetBundleTool/BuildLevel(打包场景模式))")]
+    public static void BuildScenceLevel()
+    {
+        var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), "Scenes");
+
+        var origin = Path.Combine(Application.dataPath, "Scene");
+
+
         if (!Directory.Exists(bundleTempDirectory))
         {
             Directory.CreateDirectory(bundleTempDirectory);
@@ -38,9 +48,29 @@ public class BuildAssetbundleTool
             Debug.LogError(targetDirectroy);
         }
         CleanAllDestDir(targetDirectroy);
-        MarkBundleNames(Path.Combine(Application.dataPath, "Game/Res"));
-       
+        var list = MarkBundleNames(origin);
+
+        BuildPipeline.BuildAssetBundles(targetDirectroy, list.ToArray(), BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+        Caching.CleanCache();
+    }
+    public static void Build(BuildAssetBundleOptions options, string origin, string targetDirectroy)
+    {
+
+        if (!Directory.Exists(bundleTempDirectory))
+        {
+            Directory.CreateDirectory(bundleTempDirectory);
+        }
+
+        if (!Directory.Exists(targetDirectroy))
+        {
+            Directory.CreateDirectory(targetDirectroy);
+            Debug.LogError(targetDirectroy);
+        }
+        CleanAllDestDir(targetDirectroy);
+        MarkBundleNames(origin);
+
         BuildPipeline.BuildAssetBundles(targetDirectroy, options, EditorUserBuildSettings.activeBuildTarget);
+        Caching.CleanCache();
     }
     //[MenuItem("GameObject/CreateGo %left u")]
     //static void CreateGo()
@@ -84,8 +114,7 @@ public class BuildAssetbundleTool
         }
         CleanAllDestDir(detecDir);
         var list = new List<string>();
-        GetChildDirectroys(origineDir, list);
-        list.Insert(0,origineDir);//需要拷贝根目录下的文件
+        GetAllDirectroys(origineDir, list);
         foreach (var dir in list)
         {
             var files = Directory.GetFiles(dir);
@@ -109,10 +138,10 @@ public class BuildAssetbundleTool
             return;
         }
         var list = new List<string>();
-        GetChildDirectroys(detectDir, list);
-        
+        GetAllDirectroys(detectDir, list);
+
         int count = list.Count;
-        for (int i = count - 1; i >= 0; i--)
+        for (int i = count - 1; i >= 1; i--)//不删除根目录
         {
             var files = Directory.GetFiles(list[i]);
             foreach (var file in files)
@@ -121,11 +150,7 @@ public class BuildAssetbundleTool
             }
             Directory.Delete(list[i]);
         }
-        var child = Directory.GetFiles(detectDir);
-        foreach (var file in child)
-        {
-            File.Delete(file);
-        }
+
     }
     /// <summary>
     /// 获得所有子目录
@@ -143,28 +168,52 @@ public class BuildAssetbundleTool
             GetChildDirectroys(directroyName, list);
         }
     }
-    public static void MarkBundleNames(string directory)
+    /// <summary>
+    /// 获得所有子目录(包含自身)
+    /// </summary>
+    /// <param name="directory"></param>
+    /// <param name="list"></param>
+    public static void GetAllDirectroys(string directory, List<string> list)
+    {
+        GetChildDirectroys(directory, list);
+        list.Insert(0, directory);
+    }
+    public static List<AssetBundleBuild> MarkBundleNames(string directory)
     {
         List<string> directorys = new List<string>();
-        GetChildDirectroys(directory, directorys);
+        List<AssetBundleBuild> builds = new List<AssetBundleBuild>();
+        GetAllDirectroys(directory, directorys);
         foreach (var path in directorys)
         {
             var array = Directory.GetFiles(path);
             int length = array.Length;
             for (int i = 0; i < length; i++)
             {
-                
+
                 var fileWithPathName = array[i].Replace(Application.dataPath, "Assets");
-               
+
                 var importer = AssetImporter.GetAtPath(fileWithPathName);
                 if (importer != null)
                 {
                     var bundleMarkName = fileWithPathName.Replace("Assets\\", "").Split('.')[0] + ".unity3d";
                     importer.assetBundleName = bundleMarkName;
+
+
+
+                    AssetBundleBuild build = new AssetBundleBuild();
+                    build.assetBundleName = importer.assetBundleName;
+                    //build.assetBundleVariant = importer.assetBundleVariant;
+                    var assetName = Path.GetFullPath(array[i]);
+                    assetName = assetName.Replace("\\", "/");
+                    assetName = assetName.Replace(Application.dataPath, "Assets");
+                    build.assetNames = new string[1] { assetName };
+
+                    builds.Add(build);
                 }
             }
         }
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        return builds;
     }
 }

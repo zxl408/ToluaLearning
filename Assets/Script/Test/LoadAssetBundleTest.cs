@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.Networking;
-
+#if UNITY_EDITOR
 public class LoadAssetBundleTest : MonoBehaviour
 {
     //string formatUri = "http://192.168.0.106:9200/resServer/TestLua/Win/{0}/game/res/model/cube.unity3d";
@@ -35,6 +35,10 @@ public class LoadAssetBundleTest : MonoBehaviour
         if (GUI.Button(new Rect(10, 110, 200, 30), "ChunkBasedCompression"))
         {
             StartCoroutine(LoadAssetBundle(UnityEditor.BuildAssetBundleOptions.ChunkBasedCompression));
+        }
+        if (GUI.Button(new Rect(10, 160, 200, 30), "LoadScence"))
+        {
+            StartCoroutine(LoadScene());
         }
     }
     //IEnumerator LoadAssetBundle(UnityEditor.BuildAssetBundleOptions options)
@@ -142,4 +146,21 @@ public class LoadAssetBundleTest : MonoBehaviour
 
         request.Dispose();
     }
+    
+    IEnumerator LoadScene()
+    {
+        string uri = "http://192.168.0.106:9200/resServer/TestLua/Win/scenes/scene/maingame.unity3d";
+
+        float startTime = Time.time;
+
+        UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.GetAssetBundle(uri, 0);
+
+        yield return request.Send();
+        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("mainGame");//加载场景只需要 下载包然后调用loadscene就能用了
+    }
 }
+
+
+
+#endif

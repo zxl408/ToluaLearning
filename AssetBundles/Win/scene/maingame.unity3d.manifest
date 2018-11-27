@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 3410483646
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bbf6a674d2362dfd50c13125d93c3dc3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Scene/mainGame.unity
+Dependencies: []
