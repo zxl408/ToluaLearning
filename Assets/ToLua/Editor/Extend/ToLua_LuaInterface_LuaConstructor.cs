@@ -31,7 +31,7 @@ public class ToLua_LuaInterface_LuaConstructor
     [UseDefinedAttribute]
     public void Destroy()
     {
-
+        Debugger.Log("Destroy");
     }
 
     [UseDefinedAttribute]

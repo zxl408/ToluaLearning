@@ -155,8 +155,9 @@ public static class CustomSettings
         _GT(typeof(LuaBaseBehaviour)),
         _GT(typeof(NewTestEventListener)),
         _GT(typeof(TestLuaEnum)),
-        _GT(typeof(TestClassA)),      
-        _GT(typeof(UnityEngine.Resources))
+        _GT(typeof(TestClassA)),
+        _GT(typeof(AssetBundleManager)),
+
 
     };
 

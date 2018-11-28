@@ -44,7 +44,7 @@ public class AssetBundleManager : MonoBehaviour
     }
     private void Start()
     {
-
+        LoadAssetBundle("....");
     }
     void Init()
     {
@@ -69,21 +69,22 @@ public class AssetBundleManager : MonoBehaviour
 
 
     }
+    
     public void LoadAssetBundle(string assetbundleName)
     {
-        var array= manifest.GetAllDependencies(assetbundleName);
-        for (int i = 0; i < array.Length; i++) {
-            AssetBundleItem item;
-            if (assetBundles.TryGetValue(array[i], out item))
-            {
-                if (item != null && item.referenceCount > 0) {
-                    continue;
-                }
-            }
-            else {
+        //var array= manifest.GetAllDependencies(assetbundleName);
+        //for (int i = 0; i < array.Length; i++) {
+        //    AssetBundleItem item;
+        //    if (assetBundles.TryGetValue(array[i], out item))
+        //    {
+        //        if (item != null && item.referenceCount > 0) {
+        //            continue;
+        //        }
+        //    }
+        //    else {
 
-            }
-        }
+        //    }
+        //}
     }
     IEnumerator LoadAsset(string assetName) {
         UnityWebRequest request = UnityWebRequest.GetAssetBundle(Path.Combine(assetBundleRootUri,assetName));

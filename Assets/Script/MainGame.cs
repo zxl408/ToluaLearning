@@ -9,7 +9,7 @@ public class MainGame : MonoBehaviour {
     private void Awake()
     {
         listener= gameObject.AddComponent<NewTestEventListener>();
-      
+    
     }
     // Use this for initialization
     void Start () {

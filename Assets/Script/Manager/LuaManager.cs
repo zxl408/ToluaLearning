@@ -8,8 +8,10 @@ using System.IO;
 
 public class LuaManager : LuaClient
 {
-    public LuaState LuaState {
-        get {
+    public LuaState LuaState
+    {
+        get
+        {
             return luaState;
         }
     }
@@ -17,5 +19,9 @@ public class LuaManager : LuaClient
     {
         base.OpenLibs();
         OpenCJson();
+    }
+    protected override void OnLoadFinished()
+    {
+        base.OnLoadFinished();
     }
 }

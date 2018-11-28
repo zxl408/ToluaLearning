@@ -98,8 +98,7 @@ function behaviour:Start()
     local array = tolua.toarray(objs,typeof(Vector3))
     local obj = tolua.createinstance(t,array)
 
-    --@type System.Collections.Generic.List
-    list = System.Collections.Generic.List()
+
 end
 function behaviour:OnEnable()
     base.OnEnable(self)
