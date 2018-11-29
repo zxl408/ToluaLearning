@@ -21,12 +21,14 @@ public class BuildAssetbundleTool
     public static void Build()
     {
         var origin = Path.Combine(Application.dataPath, "Game/Res");
-        var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.None.ToString());
-        Build(BuildAssetBundleOptions.None, origin, targetDirectroy);
-        targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.UncompressedAssetBundle.ToString());
+        var targetDirectroy = Path.Combine(bundleTempDirectory, osDir);
         Build(BuildAssetBundleOptions.UncompressedAssetBundle, origin, targetDirectroy);
-        targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.ChunkBasedCompression.ToString());
-        Build(BuildAssetBundleOptions.ChunkBasedCompression, origin, targetDirectroy);
+        //var targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.None.ToString());
+        //Build(BuildAssetBundleOptions.None, origin, targetDirectroy);
+        //targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.UncompressedAssetBundle.ToString());
+        //Build(BuildAssetBundleOptions.UncompressedAssetBundle, origin, targetDirectroy);
+        //targetDirectroy = Path.Combine(Path.Combine(bundleTempDirectory, osDir), BuildAssetBundleOptions.ChunkBasedCompression.ToString());
+        //Build(BuildAssetBundleOptions.ChunkBasedCompression, origin, targetDirectroy);
     }
 
     [MenuItem("BuildAssetBundleTool/BuildLevel(打包场景模式))")]

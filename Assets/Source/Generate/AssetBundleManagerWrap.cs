@@ -7,15 +7,53 @@ public class AssetBundleManagerWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(AssetBundleManager), typeof(UnityEngine.MonoBehaviour));
+		L.RegFunction("Init", Init);
+		L.RegFunction("LoadLuaFile", LoadLuaFile);
 		L.RegFunction("LoadAssetBundle", LoadAssetBundle);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("manifest", get_manifest, set_manifest);
 		L.RegVar("ManifestUri", get_ManifestUri, set_ManifestUri);
 		L.RegVar("assetBundleRootUri", get_assetBundleRootUri, set_assetBundleRootUri);
-		L.RegVar("Ins", get_Ins, set_Ins);
+		L.RegVar("ins", get_ins, set_ins);
 		L.RegVar("isInit", get_isInit, set_isInit);
+		L.RegVar("Ins", get_Ins, null);
 		L.EndClass();
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Init(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			AssetBundleManager obj = (AssetBundleManager)ToLua.CheckObject<AssetBundleManager>(L, 1);
+			System.Action<bool> arg0 = (System.Action<bool>)ToLua.CheckDelegate<System.Action<bool>>(L, 2);
+			obj.Init(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadLuaFile(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			AssetBundleManager obj = (AssetBundleManager)ToLua.CheckObject<AssetBundleManager>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			System.Action<UnityEngine.AssetBundle> arg1 = (System.Action<UnityEngine.AssetBundle>)ToLua.CheckDelegate<System.Action<UnityEngine.AssetBundle>>(L, 3);
+			obj.LoadLuaFile(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -23,10 +61,11 @@ public class AssetBundleManagerWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
+			ToLua.CheckArgsCount(L, 3);
 			AssetBundleManager obj = (AssetBundleManager)ToLua.CheckObject<AssetBundleManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
-			obj.LoadAssetBundle(arg0);
+			System.Action<AssetBundleItem> arg1 = (System.Action<AssetBundleItem>)ToLua.CheckDelegate<System.Action<AssetBundleItem>>(L, 3);
+			obj.LoadAssetBundle(arg0, arg1);
 			return 0;
 		}
 		catch (Exception e)
@@ -111,11 +150,11 @@ public class AssetBundleManagerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_Ins(IntPtr L)
+	static int get_ins(IntPtr L)
 	{
 		try
 		{
-			ToLua.Push(L, AssetBundleManager.Ins);
+			ToLua.Push(L, AssetBundleManager.ins);
 			return 1;
 		}
 		catch (Exception e)
@@ -140,6 +179,20 @@ public class AssetBundleManagerWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isInit on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_Ins(IntPtr L)
+	{
+		try
+		{
+			ToLua.Push(L, AssetBundleManager.Ins);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
 		}
 	}
 
@@ -201,12 +254,12 @@ public class AssetBundleManagerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_Ins(IntPtr L)
+	static int set_ins(IntPtr L)
 	{
 		try
 		{
 			AssetBundleManager arg0 = (AssetBundleManager)ToLua.CheckObject<AssetBundleManager>(L, 2);
-			AssetBundleManager.Ins = arg0;
+			AssetBundleManager.ins = arg0;
 			return 0;
 		}
 		catch (Exception e)

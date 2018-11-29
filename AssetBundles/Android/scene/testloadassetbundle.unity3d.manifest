@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 1197502269
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a684b4d21e44fa0363a42797503aa294
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Scene/TestLoadAssetBundle.unity
+Dependencies: []

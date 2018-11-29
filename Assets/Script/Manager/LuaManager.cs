@@ -22,6 +22,6 @@ public class LuaManager : LuaClient
     }
     protected override void OnLoadFinished()
     {
-        base.OnLoadFinished();
+        base.OnLoadFinished();    
     }
 }

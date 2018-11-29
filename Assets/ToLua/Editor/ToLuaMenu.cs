@@ -996,6 +996,7 @@ public static class ToLuaMenu
         string destDir = Application.persistentDataPath + "/" + GetOS() + "/Lua";
         CopyLuaBytesFiles(LuaConst.luaDir, destDir, false);
         CopyLuaBytesFiles(LuaConst.toluaDir, destDir, false);
+        Debug.LogError(destDir);
         AssetDatabase.Refresh();
         Debug.Log("Copy lua files over");
     }

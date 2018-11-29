@@ -60,6 +60,9 @@ public class DelegateFactory
 		dict.Add(typeof(NewTestEventListener.OnClick), factory.NewTestEventListener_OnClick);
 		dict.Add(typeof(System.Func<bool>), factory.System_Func_bool);
 		dict.Add(typeof(NewTestEventListener.VoidDelegate), factory.NewTestEventListener_VoidDelegate);
+		dict.Add(typeof(System.Action<bool>), factory.System_Action_bool);
+		dict.Add(typeof(System.Action<UnityEngine.AssetBundle>), factory.System_Action_UnityEngine_AssetBundle);
+		dict.Add(typeof(System.Action<AssetBundleItem>), factory.System_Action_AssetBundleItem);
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
@@ -104,6 +107,9 @@ public class DelegateFactory
 		DelegateTraits<NewTestEventListener.OnClick>.Init(factory.NewTestEventListener_OnClick);
 		DelegateTraits<System.Func<bool>>.Init(factory.System_Func_bool);
 		DelegateTraits<NewTestEventListener.VoidDelegate>.Init(factory.NewTestEventListener_VoidDelegate);
+		DelegateTraits<System.Action<bool>>.Init(factory.System_Action_bool);
+		DelegateTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.System_Action_UnityEngine_AssetBundle);
+		DelegateTraits<System.Action<AssetBundleItem>>.Init(factory.System_Action_AssetBundleItem);
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
@@ -148,6 +154,9 @@ public class DelegateFactory
 		TypeTraits<NewTestEventListener.OnClick>.Init(factory.Check_NewTestEventListener_OnClick);
 		TypeTraits<System.Func<bool>>.Init(factory.Check_System_Func_bool);
 		TypeTraits<NewTestEventListener.VoidDelegate>.Init(factory.Check_NewTestEventListener_VoidDelegate);
+		TypeTraits<System.Action<bool>>.Init(factory.Check_System_Action_bool);
+		TypeTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.Check_System_Action_UnityEngine_AssetBundle);
+		TypeTraits<System.Action<AssetBundleItem>>.Init(factory.Check_System_Action_AssetBundleItem);
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
@@ -192,6 +201,9 @@ public class DelegateFactory
 		StackTraits<NewTestEventListener.OnClick>.Push = factory.Push_NewTestEventListener_OnClick;
 		StackTraits<System.Func<bool>>.Push = factory.Push_System_Func_bool;
 		StackTraits<NewTestEventListener.VoidDelegate>.Push = factory.Push_NewTestEventListener_VoidDelegate;
+		StackTraits<System.Action<bool>>.Push = factory.Push_System_Action_bool;
+		StackTraits<System.Action<UnityEngine.AssetBundle>>.Push = factory.Push_System_Action_UnityEngine_AssetBundle;
+		StackTraits<System.Action<AssetBundleItem>>.Push = factory.Push_System_Action_AssetBundleItem;
 	}
     
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
@@ -2790,6 +2802,177 @@ public class DelegateFactory
 	}
 
 	void Push_NewTestEventListener_VoidDelegate(IntPtr L, NewTestEventListener.VoidDelegate o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_bool_Event : LuaDelegate
+	{
+		public System_Action_bool_Event(LuaFunction func) : base(func) { }
+		public System_Action_bool_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(bool param0)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(bool param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<bool> System_Action_bool(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<bool> fn = delegate(bool param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_bool_Event target = new System_Action_bool_Event(func);
+			System.Action<bool> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_bool_Event target = new System_Action_bool_Event(func, self);
+			System.Action<bool> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_bool(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<bool>), L, pos);
+	}
+
+	void Push_System_Action_bool(IntPtr L, System.Action<bool> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_UnityEngine_AssetBundle_Event : LuaDelegate
+	{
+		public System_Action_UnityEngine_AssetBundle_Event(LuaFunction func) : base(func) { }
+		public System_Action_UnityEngine_AssetBundle_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(UnityEngine.AssetBundle param0)
+		{
+			func.BeginPCall();
+			func.PushSealed(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(UnityEngine.AssetBundle param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushSealed(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<UnityEngine.AssetBundle> System_Action_UnityEngine_AssetBundle(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<UnityEngine.AssetBundle> fn = delegate(UnityEngine.AssetBundle param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_UnityEngine_AssetBundle_Event target = new System_Action_UnityEngine_AssetBundle_Event(func);
+			System.Action<UnityEngine.AssetBundle> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_UnityEngine_AssetBundle_Event target = new System_Action_UnityEngine_AssetBundle_Event(func, self);
+			System.Action<UnityEngine.AssetBundle> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_UnityEngine_AssetBundle(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<UnityEngine.AssetBundle>), L, pos);
+	}
+
+	void Push_System_Action_UnityEngine_AssetBundle(IntPtr L, System.Action<UnityEngine.AssetBundle> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Action_AssetBundleItem_Event : LuaDelegate
+	{
+		public System_Action_AssetBundleItem_Event(LuaFunction func) : base(func) { }
+		public System_Action_AssetBundleItem_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(AssetBundleItem param0)
+		{
+			func.BeginPCall();
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(AssetBundleItem param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PushObject(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public System.Action<AssetBundleItem> System_Action_AssetBundleItem(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Action<AssetBundleItem> fn = delegate(AssetBundleItem param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Action_AssetBundleItem_Event target = new System_Action_AssetBundleItem_Event(func);
+			System.Action<AssetBundleItem> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Action_AssetBundleItem_Event target = new System_Action_AssetBundleItem_Event(func, self);
+			System.Action<AssetBundleItem> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Action_AssetBundleItem(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<AssetBundleItem>), L, pos);
+	}
+
+	void Push_System_Action_AssetBundleItem(IntPtr L, System.Action<AssetBundleItem> o)
 	{
 		ToLua.Push(L, o);
 	}

@@ -35,5 +35,6 @@ public class MainGame : MonoBehaviour {
         {
             listener.OnClickEvent(luaGo);
         }
+      
     }
 }
