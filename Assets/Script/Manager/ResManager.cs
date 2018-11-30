@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.IO;
 /// <summary>
 /// 资源管理器
 /// </summary>
@@ -15,14 +16,28 @@ public class ResManager : MonoBehaviour
     {
         resManager = this;
     }
-     
-   public  void InitRes(System.Action<bool> onfinsh)
+
+    public void InitRes(System.Action<bool> onfinsh)
     {
+        //InitLocalCach();
         AssetBundleManager = AssetBundleManager.Ins;
-        AssetBundleManager.Init((isSucess)=> {
+
+        AssetBundleManager.Init((isSucess) =>
+        {
             DownLoadLua(onfinsh);
         });
-        
+
+    }
+    void InitLocalCach()
+    {
+        if (!System.IO.Directory.Exists(MainGameConfig.LocalResUrl))
+        {
+            System.IO.Directory.CreateDirectory(MainGameConfig.LocalResUrl.Replace("file:///", ""));
+        }
+        if (!System.IO.Directory.Exists(MainGameConfig.LocalLuaUrl))
+        {
+            System.IO.Directory.CreateDirectory(MainGameConfig.LocalLuaUrl.Replace("file:///", ""));
+        }
     }
     void DownLoadLua(System.Action<bool> onfinsh)
     {
@@ -31,11 +46,14 @@ public class ResManager : MonoBehaviour
         int count = list.Count;
         foreach (var assetName in list)
         {
-            AssetBundleManager.LoadLuaFile(assetName, (bundle => {
+            AssetBundleManager.LoadLuaFile(assetName, (bundle =>
+            {
                 if (bundle != null)
                 {
-                    print("AddSearchBundle "+assetName);
-                    LuaFileUtils.Instance.AddSearchBundle(assetName, bundle);
+                    Debug.LogError("assetName: "+assetName);
+                    string fielName = Path.GetFileNameWithoutExtension(assetName);
+                    print("name: " + fielName);
+                    LuaFileUtils.Instance.AddSearchBundle(fielName, bundle);
                     count--;
                     if (count == 0)
                     {
@@ -43,7 +61,8 @@ public class ResManager : MonoBehaviour
                             onfinsh(true);
                     }
                 }
-                else {
+                else
+                {
                     if (onfinsh != null)
                         onfinsh(false);
                 }
@@ -69,7 +88,7 @@ public class ResManager : MonoBehaviour
             resManager = GameObject.FindObjectOfType<ResManager>();
             if (resManager == null)
                 resManager = (new GameObject("ResManager")).AddComponent<ResManager>();
-            
+
         }
         return resManager;
     }

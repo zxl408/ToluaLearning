@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 3122601934
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: be38925e5e087de0baaf5248f4dced57
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6724eb4c0842e3529c2bc1a5d193251f
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Texture/02.jpg
+- Assets/Game/Texture/01.jpg
+- Assets/Game/Materials/cube.mat
+Dependencies: []

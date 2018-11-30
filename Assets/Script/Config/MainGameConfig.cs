@@ -16,17 +16,26 @@ public static class MainGameConfig
     public static string osDir = "";        
 #endif
     private static string remoteResUrl = "http://192.168.0.106:9200/resServer/TestLua";
-    public static string RemoteResUri {
+    public static string RemoteResUrl {
         get {
             
             System.Uri uri = new System.Uri(Path.Combine(remoteResUrl, osDir));
             return uri.AbsoluteUri;
         }
     }
+
+    public static string LocalResUrl
+    {
+        get
+        {
+            System.Uri uri = new System.Uri(Path.Combine(Application.persistentDataPath, osDir));
+            return uri.AbsoluteUri;
+        }
+    }
     private static string remoteLuaUrl = "Lua";
     public static string RemoteLuaUrl {
         get {         
-            System.Uri uri = new System.Uri(Path.Combine(RemoteResUri, remoteLuaUrl));
+            System.Uri uri = new System.Uri(Path.Combine(RemoteResUrl, remoteLuaUrl));
             return uri.AbsoluteUri;
         }
     }
@@ -35,7 +44,7 @@ public static class MainGameConfig
     {
         get
         {           
-            System.Uri uri = new System.Uri(Path.Combine(Application.persistentDataPath, localLuaUrl));
+            System.Uri uri = new System.Uri(Path.Combine(LocalResUrl, localLuaUrl));
             return uri.AbsoluteUri;
         }
     }

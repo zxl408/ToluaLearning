@@ -30,6 +30,7 @@ public class TestABLoader : MonoBehaviour
             }
 
             --bundleCount;
+            Debug.LogError("name:" + name);
             LuaFileUtils.Instance.AddSearchBundle(name, www.assetBundle);
             www.Dispose();
         }                     
@@ -77,7 +78,9 @@ public class TestABLoader : MonoBehaviour
 #else
             string path = "file:///" + streamingPath + "/" + LuaConst.osDir + "/" + str;
 #endif
+
             string name = Path.GetFileNameWithoutExtension(str);
+          
             StartCoroutine(CoLoadBundle(name, path));            
         }
 

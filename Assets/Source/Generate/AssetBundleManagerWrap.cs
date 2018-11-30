@@ -10,6 +10,7 @@ public class AssetBundleManagerWrap
 		L.RegFunction("Init", Init);
 		L.RegFunction("LoadLuaFile", LoadLuaFile);
 		L.RegFunction("LoadAssetBundle", LoadAssetBundle);
+		L.RegFunction("GetLocalPath", GetLocalPath);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("manifest", get_manifest, set_manifest);
@@ -67,6 +68,24 @@ public class AssetBundleManagerWrap
 			System.Action<AssetBundleItem> arg1 = (System.Action<AssetBundleItem>)ToLua.CheckDelegate<System.Action<AssetBundleItem>>(L, 3);
 			obj.LoadAssetBundle(arg0, arg1);
 			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetLocalPath(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			AssetBundleManager obj = (AssetBundleManager)ToLua.CheckObject<AssetBundleManager>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string o = obj.GetLocalPath(arg0);
+			LuaDLL.lua_pushstring(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{

@@ -21,27 +21,45 @@
     <Method Name="CheckReference" PublishedName="CheckReference" Signature="CheckReference" FullSignature="System.Void AssetBundleItem::CheckReference()" Index="19" />
     <Method Name="Delete" PublishedName="Delete" Signature="Delete" FullSignature="System.Void AssetBundleItem::Delete()" Index="18" />
     <Method Name="get_assetbundle" PublishedName="get_assetbundle" Signature="get_assetbundle" FullSignature="UnityEngine.AssetBundle AssetBundleItem::get_assetbundle()" Index="15" />
+    <Method Name="get_Assetbundle" PublishedName="get_Assetbundle" Signature="get_Assetbundle" FullSignature="UnityEngine.AssetBundle AssetBundleItem::get_Assetbundle()" Index="704" />
+    <Method Name="get_IsVailed" PublishedName="get_IsVailed" Signature="get_IsVailed" FullSignature="System.Boolean AssetBundleItem::get_IsVailed()" Index="706" />
     <Method Name="Register" PublishedName="Register" Signature="Register" FullSignature="System.Void AssetBundleItem::Register()" Index="17" />
     <Method Name="set_assetbundle" PublishedName="set_assetbundle" Signature="set_assetbundle-AssetBundle" FullSignature="System.Void AssetBundleItem::set_assetbundle(UnityEngine.AssetBundle)" Index="16" />
+    <Method Name="set_Assetbundle" PublishedName="set_Assetbundle" Signature="set_Assetbundle-AssetBundle" FullSignature="System.Void AssetBundleItem::set_Assetbundle(UnityEngine.AssetBundle)" Index="705" />
   </Type>
   <Type Name="AssetBundleManager">
     <Method Name="Awake" PublishedName="Awake" Signature="Awake" FullSignature="System.Void AssetBundleManager::Awake()" Index="20" />
+    <Method Name="DownLoadToLocal" PublishedName="DownLoadToLocal" Signature="DownLoadToLocal-string-byte[]" FullSignature="System.Void AssetBundleManager::DownLoadToLocal(System.String,System.Byte[])" Index="734" />
+    <Method Name="get_Ins" PublishedName="get_Ins" Signature="get_Ins" FullSignature="AssetBundleManager AssetBundleManager::get_Ins()" Index="707" />
+    <Method Name="GetLocalPath" PublishedName="GetLocalPath" Signature="GetLocalPath-string" FullSignature="System.String AssetBundleManager::GetLocalPath(System.String)" Index="735" />
     <Method Name="Init" PublishedName="Init" Signature="Init" FullSignature="System.Void AssetBundleManager::Init()" Index="22" />
-    <Method Name="LoadAsset" PublishedName="LoadAsset" Signature="LoadAsset-string" FullSignature="System.Collections.IEnumerator AssetBundleManager::LoadAsset(System.String)" Index="25" />
-    <Method Name="LoadAssetBundle" PublishedName="LoadAssetBundle" Signature="LoadAssetBundle-string" FullSignature="System.Void AssetBundleManager::LoadAssetBundle(System.String)" Index="24" />
+    <Method Name="Init" PublishedName="Init-Action&lt;bool&gt;" Signature="Init-Action&lt;bool&gt;" FullSignature="System.Void AssetBundleManager::Init(System.Action`1&lt;System.Boolean&gt;)" Index="708" />
+    <Method Name="IsLoadedAllDepends" PublishedName="IsLoadedAllDepends" Signature="IsLoadedAllDepends-string" FullSignature="System.Boolean AssetBundleManager::IsLoadedAllDepends(System.String)" Index="714" />
+    <Method Name="LoadAssetBundle" PublishedName="LoadAssetBundle-string" Signature="LoadAssetBundle-string" FullSignature="System.Void AssetBundleManager::LoadAssetBundle(System.String)" Index="24" />
+    <Method Name="LoadAssetBundle" PublishedName="LoadAssetBundle-string-Action&lt;AssetBundleItem&gt;" Signature="LoadAssetBundle-string-Action&lt;AssetBundleItem&gt;" FullSignature="System.Void AssetBundleManager::LoadAssetBundle(System.String,System.Action`1&lt;AssetBundleItem&gt;)" Index="712" />
+    <Method Name="LoadAsset" PublishedName="LoadAsset-string" Signature="LoadAsset-string" FullSignature="System.Collections.IEnumerator AssetBundleManager::LoadAsset(System.String)" Index="25" />
+    <Method Name="LoadAsset" PublishedName="LoadAsset-string-Action&lt;string,bool&gt;" Signature="LoadAsset-string-Action&lt;string,bool&gt;" FullSignature="System.Collections.IEnumerator AssetBundleManager::LoadAsset(System.String,System.Action`2&lt;System.String,System.Boolean&gt;)" Index="713" />
+    <Method Name="LoadLuaFile" PublishedName="LoadLuaFile" Signature="LoadLuaFile-string-Action&lt;AssetBundle&gt;" FullSignature="System.Void AssetBundleManager::LoadLuaFile(System.String,System.Action`1&lt;UnityEngine.AssetBundle&gt;)" Index="710" />
     <Method Name="LoadManifest" PublishedName="LoadManifest" Signature="LoadManifest" FullSignature="System.Collections.IEnumerator AssetBundleManager::LoadManifest()" Index="23" />
+    <Method Name="LoadManifest" PublishedName="LoadManifest-Action&lt;bool&gt;" Signature="LoadManifest-Action&lt;bool&gt;" FullSignature="System.Collections.IEnumerator AssetBundleManager::LoadManifest(System.Action`1&lt;System.Boolean&gt;)" Index="709" />
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void AssetBundleManager::Start()" Index="21" />
+    <Method Name="TryGetDepends" PublishedName="TryGetDepends" Signature="TryGetDepends-string" FullSignature="System.String[] AssetBundleManager::TryGetDepends(System.String)" Index="711" />
   </Type>
   <Type Name="AssetBundleManagerWrap">
     <Method Name="get_assetBundleRootUri" PublishedName="get_assetBundleRootUri" Signature="get_assetBundleRootUri-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_assetBundleRootUri(System.IntPtr)" Index="691" />
+    <Method Name="get_ins" PublishedName="get_ins" Signature="get_ins-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_ins(System.IntPtr)" Index="730" />
     <Method Name="get_Ins" PublishedName="get_Ins" Signature="get_Ins-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_Ins(System.IntPtr)" Index="692" />
     <Method Name="get_isInit" PublishedName="get_isInit" Signature="get_isInit-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_isInit(System.IntPtr)" Index="693" />
     <Method Name="get_manifest" PublishedName="get_manifest" Signature="get_manifest-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_manifest(System.IntPtr)" Index="689" />
     <Method Name="get_ManifestUri" PublishedName="get_ManifestUri" Signature="get_ManifestUri-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::get_ManifestUri(System.IntPtr)" Index="690" />
+    <Method Name="GetLocalPath" PublishedName="GetLocalPath" Signature="GetLocalPath-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::GetLocalPath(System.IntPtr)" Index="737" />
+    <Method Name="Init" PublishedName="Init" Signature="Init-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::Init(System.IntPtr)" Index="728" />
     <Method Name="LoadAssetBundle" PublishedName="LoadAssetBundle" Signature="LoadAssetBundle-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::LoadAssetBundle(System.IntPtr)" Index="687" />
+    <Method Name="LoadLuaFile" PublishedName="LoadLuaFile" Signature="LoadLuaFile-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::LoadLuaFile(System.IntPtr)" Index="729" />
     <Method Name="op_Equality" PublishedName="op_Equality" Signature="op_Equality-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::op_Equality(System.IntPtr)" Index="688" />
     <Method Name="Register" PublishedName="Register" Signature="Register-LuaState" FullSignature="System.Void AssetBundleManagerWrap::Register(LuaInterface.LuaState)" Index="686" />
     <Method Name="set_assetBundleRootUri" PublishedName="set_assetBundleRootUri" Signature="set_assetBundleRootUri-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::set_assetBundleRootUri(System.IntPtr)" Index="696" />
+    <Method Name="set_ins" PublishedName="set_ins" Signature="set_ins-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::set_ins(System.IntPtr)" Index="731" />
     <Method Name="set_Ins" PublishedName="set_Ins" Signature="set_Ins-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::set_Ins(System.IntPtr)" Index="697" />
     <Method Name="set_isInit" PublishedName="set_isInit" Signature="set_isInit-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::set_isInit(System.IntPtr)" Index="698" />
     <Method Name="set_manifest" PublishedName="set_manifest" Signature="set_manifest-IntPtr" FullSignature="System.Int32 AssetBundleManagerWrap::set_manifest(System.IntPtr)" Index="694" />
@@ -299,9 +317,17 @@
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void DicTest::Start()" Index="343" />
     <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void DicTest::Update()" Index="345" />
   </Type>
+  <Type Name="Entry">
+    <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void Entry::Start()" Index="702" />
+    <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void Entry::Update()" Index="703" />
+  </Type>
   <Type Name="EventTest">
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void EventTest::Start()" Index="28" />
     <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void EventTest::Update()" Index="29" />
+  </Type>
+  <Type Name="GameManager">
+    <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void GameManager::Start()" Index="715" />
+    <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void GameManager::Update()" Index="716" />
   </Type>
   <Type Name="HelloWorld">
     <Method Name="Awake" PublishedName="Awake" Signature="Awake" FullSignature="System.Void HelloWorld::Awake()" Index="351" />
@@ -359,6 +385,7 @@
   </Type>
   <Type Name="LuaManager">
     <Method Name="get_LuaState" PublishedName="get_LuaState" Signature="get_LuaState" FullSignature="LuaInterface.LuaState LuaManager::get_LuaState()" Index="26" />
+    <Method Name="InitLoader" PublishedName="InitLoader" Signature="InitLoader" FullSignature="LuaInterface.LuaFileUtils LuaManager::InitLoader()" Index="738" />
     <Method Name="OnLoadFinished" PublishedName="OnLoadFinished" Signature="OnLoadFinished" FullSignature="System.Void LuaManager::OnLoadFinished()" Index="685" />
     <Method Name="OpenLibs" PublishedName="OpenLibs" Signature="OpenLibs" FullSignature="System.Void LuaManager::OpenLibs()" Index="27" />
   </Type>
@@ -382,6 +409,13 @@
     <Method Name="OnGUI" PublishedName="OnGUI" Signature="OnGUI" FullSignature="System.Void MainGame::OnGUI()" Index="14" />
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void MainGame::Start()" Index="12" />
     <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void MainGame::Update()" Index="13" />
+  </Type>
+  <Type Name="MainGameConfig">
+    <Method Name="get_LocalLuaUrl" PublishedName="get_LocalLuaUrl" Signature="get_LocalLuaUrl" FullSignature="System.String MainGameConfig::get_LocalLuaUrl()" Index="701" />
+    <Method Name="get_LocalResUrl" PublishedName="get_LocalResUrl" Signature="get_LocalResUrl" FullSignature="System.String MainGameConfig::get_LocalResUrl()" Index="733" />
+    <Method Name="get_RemoteLuaUrl" PublishedName="get_RemoteLuaUrl" Signature="get_RemoteLuaUrl" FullSignature="System.String MainGameConfig::get_RemoteLuaUrl()" Index="700" />
+    <Method Name="get_RemoteResUri" PublishedName="get_RemoteResUri" Signature="get_RemoteResUri" FullSignature="System.String MainGameConfig::get_RemoteResUri()" Index="699" />
+    <Method Name="get_RemoteResUrl" PublishedName="get_RemoteResUrl" Signature="get_RemoteResUrl" FullSignature="System.String MainGameConfig::get_RemoteResUrl()" Index="732" />
   </Type>
   <Type Name="MainUI">
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void MainUI::Start()" Index="46" />
@@ -419,6 +453,15 @@
     <Method Name="ToRectTable" PublishedName="ToRectTable" Signature="ToRectTable-IntPtr-int" FullSignature="System.Object PassStruct::ToRectTable(System.IntPtr,System.Int32)" Index="547" />
     <Method Name="ToRectValue" PublishedName="ToRectValue" Signature="ToRectValue-IntPtr-int" FullSignature="UnityEngine.Rect PassStruct::ToRectValue(System.IntPtr,System.Int32)" Index="543" />
   </Type>
+  <Type Name="ResManager">
+    <Method Name="Awake" PublishedName="Awake" Signature="Awake" FullSignature="System.Void ResManager::Awake()" Index="717" />
+    <Method Name="DownLoadLua" PublishedName="DownLoadLua" Signature="DownLoadLua-Action&lt;bool&gt;" FullSignature="System.Void ResManager::DownLoadLua(System.Action`1&lt;System.Boolean&gt;)" Index="719" />
+    <Method Name="GetResManager" PublishedName="GetResManager" Signature="GetResManager" FullSignature="ResManager ResManager::GetResManager()" Index="722" />
+    <Method Name="InitLocalCach" PublishedName="InitLocalCach" Signature="InitLocalCach" FullSignature="System.Void ResManager::InitLocalCach()" Index="736" />
+    <Method Name="InitRes" PublishedName="InitRes" Signature="InitRes-Action&lt;bool&gt;" FullSignature="System.Void ResManager::InitRes(System.Action`1&lt;System.Boolean&gt;)" Index="718" />
+    <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void ResManager::Start()" Index="720" />
+    <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void ResManager::Update()" Index="721" />
+  </Type>
   <Type Name="ScriptsFromFile">
     <Method Name="Log" PublishedName="Log" Signature="Log-string-string-LogType" FullSignature="System.Void ScriptsFromFile::Log(System.String,System.String,UnityEngine.LogType)" Index="353" />
     <Method Name="OnApplicationQuit" PublishedName="OnApplicationQuit" Signature="OnApplicationQuit" FullSignature="System.Void ScriptsFromFile::OnApplicationQuit()" Index="355" />
@@ -430,6 +473,13 @@
     <Method Name="OnDestroy" PublishedName="OnDestroy" Signature="OnDestroy" FullSignature="System.Void SelfTestEnum::OnDestroy()" Index="350" />
     <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void SelfTestEnum::Start()" Index="348" />
     <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void SelfTestEnum::Update()" Index="349" />
+  </Type>
+  <Type Name="ShowLog">
+    <Method Name="OnApplicationQuit" PublishedName="OnApplicationQuit" Signature="OnApplicationQuit" FullSignature="System.Void ShowLog::OnApplicationQuit()" Index="725" />
+    <Method Name="OnGUI" PublishedName="OnGUI" Signature="OnGUI" FullSignature="System.Void ShowLog::OnGUI()" Index="727" />
+    <Method Name="ShowTips" PublishedName="ShowTips" Signature="ShowTips-string-string-LogType" FullSignature="System.Void ShowLog::ShowTips(System.String,System.String,UnityEngine.LogType)" Index="726" />
+    <Method Name="Start" PublishedName="Start" Signature="Start" FullSignature="System.Void ShowLog::Start()" Index="723" />
+    <Method Name="Update" PublishedName="Update" Signature="Update" FullSignature="System.Void ShowLog::Update()" Index="724" />
   </Type>
   <Type Name="System_Collections_Generic_Dictionary_int_TestAccount_KeyCollectionWrap">
     <Method Name="_CreateSystem_Collections_Generic_Dictionary_int_TestAccount_KeyCollection" PublishedName="_CreateSystem_Collections_Generic_Dictionary_int_TestAccount_KeyCollection" Signature="_CreateSystem_Collections_Generic_Dictionary_int_TestAccount_KeyCollection-IntPtr" FullSignature="System.Int32 System_Collections_Generic_Dictionary_int_TestAccount_KeyCollectionWrap::_CreateSystem_Collections_Generic_Dictionary_int_TestAccount_KeyCollection(System.IntPtr)" Index="406" />

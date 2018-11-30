@@ -53,6 +53,7 @@ public class AssetBundleItem
 public class AssetBundleManager : MonoBehaviour
 {
     private Dictionary<string, AssetBundleItem> assetBundles = new Dictionary<string, AssetBundleItem>();
+    private Dictionary<string, string[]> dependAssets = new Dictionary<string, string[]>();
     public AssetBundleManifest manifest;
     public string ManifestUri;
     public string assetBundleRootUri;
@@ -81,7 +82,7 @@ public class AssetBundleManager : MonoBehaviour
     }
     public void Init(System.Action<bool> onfinsh)
     {
-        assetBundleRootUri = MainGameConfig.RemoteResUri;
+        assetBundleRootUri = MainGameConfig.RemoteResUrl;
         ManifestUri = new System.Uri(Path.Combine(assetBundleRootUri, MainGameConfig.osDir)).AbsoluteUri;
         StartCoroutine(LoadManifest(onfinsh));
     }
@@ -94,11 +95,11 @@ public class AssetBundleManager : MonoBehaviour
         if (assetbundle != null)
         {
             manifest = assetbundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            isInit = true;       
+            isInit = true;
         }
         else
         {
-            isInit = false;      
+            isInit = false;
         }
         if (onfinsh != null)
             onfinsh(isInit);
@@ -119,9 +120,23 @@ public class AssetBundleManager : MonoBehaviour
             }
         });
     }
+    string[] TryGetDepends(string assetbundleName)
+    {
+        string[] array = null;
+        if (dependAssets.ContainsKey(assetbundleName))
+        {
+            array = dependAssets[assetbundleName];
+        }
+        else
+        {
+            array = manifest.GetAllDependencies(assetbundleName);
+            dependAssets.Add(assetbundleName, array);
+        }
+        return array;
+    }
     public void LoadAssetBundle(string assetbundleName, System.Action<AssetBundleItem> onfinsh)
     {
-        var array = manifest.GetAllDependencies(assetbundleName);
+        string[] array = TryGetDepends(assetbundleName);
         AssetBundleItem Item;
         if (assetBundles.TryGetValue(assetbundleName, out Item))
         {
@@ -200,40 +215,90 @@ public class AssetBundleManager : MonoBehaviour
 
     IEnumerator LoadAsset(string assetName, System.Action<string, bool> onfinsh)
     {
-        UnityWebRequest request = UnityWebRequest.GetAssetBundle(Path.Combine(assetBundleRootUri, assetName));
-        var async = request.Send();
-        yield return async;
-        if (async.isDone)
+        //var localFileName = GetLocalPath(assetName);
+        string url = "";
+        bool isLoadLocal = false;
+        //if (File.Exists(localFileName.Replace("file:///", "")))
+        //{
+        //    isLoadLocal = true;
+        //    url = localFileName;
+        //}
+        //else
         {
-            var bundle = DownloadHandlerAssetBundle.GetContent(request);
-            if (!assetBundles.ContainsKey(assetName))
+            url = Path.Combine(assetBundleRootUri, assetName);
+        }
+        WWW www = new WWW(url);
+        yield return www;
+        if (string.IsNullOrEmpty(www.error))
+        {
+            if (www.isDone)
             {
-                assetBundles[assetName] = new AssetBundleItem(bundle);
+                var bundle = www.assetBundle;
+                if (!assetBundles.ContainsKey(assetName))
+                {
+                    assetBundles[assetName] = new AssetBundleItem(bundle);
+                }
+                else
+                {
+                    assetBundles.Add(assetName, new AssetBundleItem(bundle));
+                }
+                if (onfinsh != null)
+                {
+                    onfinsh(assetName, true);
+                }
+                var data = www.bytes;
+                if (!isLoadLocal)
+                    DownLoadToLocal(assetName, data);
             }
-            else
-            {
-                assetBundles.Add(assetName, new AssetBundleItem(bundle));
-            }
-            if (onfinsh != null)
-            {
-                onfinsh(assetName, true);
-            }
+
         }
         else
         {
-            Debug.LogError(assetName + " :Load error");
+            Debug.LogError(assetName + " :Load error " + www.error);
             if (onfinsh != null)
             {
                 onfinsh(assetName, false);
             }
+            yield break;
+        }
+        www.Dispose();
+    }
+   
+    void DownLoadToLocal(string assetName, byte[] data)
+    {
+        string filepath = GetLocalPath(assetName).Replace("file:///", "");
+        FileStream fs = null;
+        if (!File.Exists(filepath))
+        {
+            fs = File.Create(filepath);
+        }
+        else
+        {
+            fs = System.IO.File.OpenWrite(filepath);
         }
 
-
+        fs.BeginWrite(data, 0, data.Length, result =>
+        {
+            var stream = result.AsyncState as System.IO.FileStream;
+            try
+            {
+                stream.EndWrite(result);
+                stream.Close();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+            }
+        }, fs);
     }
-
+    public string GetLocalPath(string assetName)
+    {
+        string filepath = Path.Combine(MainGameConfig.LocalLuaUrl,assetName);
+        return filepath;
+    }
     bool IsLoadedAllDepends(string assetName)
     {
-        var array = manifest.GetAllDependencies(assetName);
+        var array = TryGetDepends(assetName);
         AssetBundleItem item;
         foreach (var it in array)
         {

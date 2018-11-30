@@ -25,29 +25,47 @@ return {
 			["CheckReference"] = 19, 
 			["Delete"] = 18, 
 			["get_assetbundle"] = 15, 
+			["get_Assetbundle"] = 704, 
+			["get_IsVailed"] = 706, 
 			["Register"] = 17, 
 			["set_assetbundle"] = 16, 
+			["set_Assetbundle"] = 705, 
 		},
 	["AssetBundleManager"] = 
 		{
 			["Awake"] = 20, 
+			["DownLoadToLocal"] = 734, 
+			["get_Ins"] = 707, 
+			["GetLocalPath"] = 735, 
 			["Init"] = 22, 
-			["LoadAsset"] = 25, 
-			["LoadAssetBundle"] = 24, 
+			["Init-Action<bool>"] = 708, 
+			["IsLoadedAllDepends"] = 714, 
+			["LoadAssetBundle-string"] = 24, 
+			["LoadAssetBundle-string-Action<AssetBundleItem>"] = 712, 
+			["LoadAsset-string"] = 25, 
+			["LoadAsset-string-Action<string,bool>"] = 713, 
+			["LoadLuaFile"] = 710, 
 			["LoadManifest"] = 23, 
+			["LoadManifest-Action<bool>"] = 709, 
 			["Start"] = 21, 
+			["TryGetDepends"] = 711, 
 		},
 	["AssetBundleManagerWrap"] = 
 		{
 			["get_assetBundleRootUri"] = 691, 
+			["get_ins"] = 730, 
 			["get_Ins"] = 692, 
 			["get_isInit"] = 693, 
 			["get_manifest"] = 689, 
 			["get_ManifestUri"] = 690, 
+			["GetLocalPath"] = 737, 
+			["Init"] = 728, 
 			["LoadAssetBundle"] = 687, 
+			["LoadLuaFile"] = 729, 
 			["op_Equality"] = 688, 
 			["Register"] = 686, 
 			["set_assetBundleRootUri"] = 696, 
+			["set_ins"] = 731, 
 			["set_Ins"] = 697, 
 			["set_isInit"] = 698, 
 			["set_manifest"] = 694, 
@@ -317,10 +335,20 @@ return {
 			["Start"] = 343, 
 			["Update"] = 345, 
 		},
+	["Entry"] = 
+		{
+			["Start"] = 702, 
+			["Update"] = 703, 
+		},
 	["EventTest"] = 
 		{
 			["Start"] = 28, 
 			["Update"] = 29, 
+		},
+	["GameManager"] = 
+		{
+			["Start"] = 715, 
+			["Update"] = 716, 
 		},
 	["HelloWorld"] = 
 		{
@@ -385,6 +413,7 @@ return {
 	["LuaManager"] = 
 		{
 			["get_LuaState"] = 26, 
+			["InitLoader"] = 738, 
 			["OnLoadFinished"] = 685, 
 			["OpenLibs"] = 27, 
 		},
@@ -411,6 +440,14 @@ return {
 			["OnGUI"] = 14, 
 			["Start"] = 12, 
 			["Update"] = 13, 
+		},
+	["MainGameConfig"] = 
+		{
+			["get_LocalLuaUrl"] = 701, 
+			["get_LocalResUrl"] = 733, 
+			["get_RemoteLuaUrl"] = 700, 
+			["get_RemoteResUri"] = 699, 
+			["get_RemoteResUrl"] = 732, 
 		},
 	["MainUI"] = 
 		{
@@ -452,6 +489,16 @@ return {
 			["ToRectTable"] = 547, 
 			["ToRectValue"] = 543, 
 		},
+	["ResManager"] = 
+		{
+			["Awake"] = 717, 
+			["DownLoadLua"] = 719, 
+			["GetResManager"] = 722, 
+			["InitLocalCach"] = 736, 
+			["InitRes"] = 718, 
+			["Start"] = 720, 
+			["Update"] = 721, 
+		},
 	["ScriptsFromFile"] = 
 		{
 			["Log"] = 353, 
@@ -465,6 +512,14 @@ return {
 			["OnDestroy"] = 350, 
 			["Start"] = 348, 
 			["Update"] = 349, 
+		},
+	["ShowLog"] = 
+		{
+			["OnApplicationQuit"] = 725, 
+			["OnGUI"] = 727, 
+			["ShowTips"] = 726, 
+			["Start"] = 723, 
+			["Update"] = 724, 
 		},
 	["System_Collections_Generic_Dictionary_int_TestAccount_KeyCollectionWrap"] = 
 		{

@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 510026202
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a50b1b3e5808b5ad8beda61536a3e37b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 29be29eb57df02fd0a97b7f5f95b1f69
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Res/Model/Cube.prefab
+Dependencies:
+- D:/UnityWorkSpace/TestWorkSpace/tolua-master/Assets/StreamingAssets/Win/game/res/temp.unity3d

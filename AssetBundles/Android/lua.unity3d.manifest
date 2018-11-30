@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1146342981
+CRC: 514620848
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4643e6e9ad25547ade5625ec49b277d0
+    Hash: 017f9fef8c50e7c49913ae3e42676d8a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
@@ -13,9 +13,9 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/temp/Lua/mobdebug.lua.bytes
-- Assets/temp/Lua/AssetManagerInjector.lua.bytes
 - Assets/temp/Lua/list.lua.bytes
 - Assets/temp/Lua/slot.lua.bytes
+- Assets/temp/Lua/LuaBaseBehaviourInjector.lua.bytes
 - Assets/temp/Lua/typeof.lua.bytes
 - Assets/temp/Lua/TestCo.lua.bytes
 - Assets/temp/Lua/ltn12.lua.bytes

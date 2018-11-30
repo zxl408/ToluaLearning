@@ -23,4 +23,5 @@ SOFTWARE.]]--
 
 --Load All The Injectores
 --require "System.Injection.ToLuaInjectionTestInjector"
-require "AssetManagerInjector"
+
+require  "LuaBaseBehaviourInjector"
