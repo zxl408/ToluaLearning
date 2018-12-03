@@ -215,15 +215,15 @@ public class AssetBundleManager : MonoBehaviour
 
     IEnumerator LoadAsset(string assetName, System.Action<string, bool> onfinsh)
     {
-        //var localFileName = GetLocalPath(assetName);
+        var localFileName = GetLocalPath(assetName);
         string url = "";
         bool isLoadLocal = false;
-        //if (File.Exists(localFileName.Replace("file:///", "")))
-        //{
-        //    isLoadLocal = true;
-        //    url = localFileName;
-        //}
-        //else
+        if (File.Exists(localFileName.Replace("file:///", "")))
+        {
+            isLoadLocal = true;
+            url = localFileName;
+        }
+        else
         {
             url = Path.Combine(assetBundleRootUri, assetName);
         }

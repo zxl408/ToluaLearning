@@ -19,7 +19,7 @@ public class ResManager : MonoBehaviour
 
     public void InitRes(System.Action<bool> onfinsh)
     {
-        //InitLocalCach();
+        InitLocalCach();
         AssetBundleManager = AssetBundleManager.Ins;
 
         AssetBundleManager.Init((isSucess) =>
