@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
 public static class MainGameConfig
 {
    
@@ -16,36 +17,64 @@ public static class MainGameConfig
     public static string osDir = "";        
 #endif
     private static string remoteResUrl = "http://192.168.0.106:9200/resServer/TestLua";
-    public static string RemoteResUrl {
+    public static string RemoteResUri {
         get {
             
             System.Uri uri = new System.Uri(Path.Combine(remoteResUrl, osDir));
             return uri.AbsoluteUri;
         }
     }
-
-    public static string LocalResUrl
+    public static string LocalResPath
     {
         get
         {
             System.Uri uri = new System.Uri(Path.Combine(Application.persistentDataPath, osDir));
+            return uri.AbsolutePath;
+        }
+    }
+    private static string resourcelistUrl = "resourcelist.txt";
+    public static string RemoteResourcelistUrl {
+        get {
+
+            System.Uri uri = new System.Uri(Path.Combine(RemoteResUri, resourcelistUrl));
             return uri.AbsoluteUri;
         }
     }
-    private static string remoteLuaUrl = "Lua";
+    public static string LocalResourcelistPath
+    {
+        get
+        {
+            System.Uri uri = new System.Uri(Path.Combine(LocalResPath, resourcelistUrl));
+            return uri.AbsolutePath;
+        }
+    }
+   
+    private static string remoteLua = "Lua";
     public static string RemoteLuaUrl {
         get {         
-            System.Uri uri = new System.Uri(Path.Combine(RemoteResUrl, remoteLuaUrl));
+            System.Uri uri = new System.Uri(Path.Combine(RemoteResUri, remoteLua));
             return uri.AbsoluteUri;
         }
     }
-    private static string localLuaUrl = "Lua/";
-    public static string LocalLuaUrl
+    private static string localLua = "Lua/";
+    public static string LocalLuaPath
     {
         get
         {           
-            System.Uri uri = new System.Uri(Path.Combine(LocalResUrl, localLuaUrl));
+            System.Uri uri = new System.Uri(Path.Combine(LocalResPath, localLua));
+            return uri.AbsolutePath;
+        }
+    }
+    private static string uipath = "game/res/gui";
+    public static string UIUrl {
+        get {
+            System.Uri uri = new System.Uri(Path.Combine(RemoteResUri, uipath));
             return uri.AbsoluteUri;
         }
     }
+    public static string GetRelativeUIAssetName(string uiName) {
+    
+        return uipath+"/"+ uiName.ToLower() + ".unity3d";
+    }
+
 }

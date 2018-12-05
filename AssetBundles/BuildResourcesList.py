@@ -1,7 +1,6 @@
 import os,sys
 
-statinfo = os.stat("D:/UnityWorkSpace/TestWorkSpace/tolua-master/AssetBundles/Android/lua.unity3d".encode('utf-8'))
-print(statinfo)
+
 def buildAllRescource():
     print("start build ...")
     currentPath = os.path.abspath('.')
@@ -20,7 +19,7 @@ def buildFiles(dirRoot,L):
         print("fullPath:"+fullPath)
         statinfo = os.stat(fullPath)
         md5str= fullPath+"&"+str(statinfo.st_mtime)+"&"+str(statinfo.st_size);         
-        fo.write(relativePath+"\t"+md5_passwd(md5str)+"\t"+str(statinfo.st_size)+"\n") 
+        fo.write(relativePath.replace('\\','/')+"\t"+md5_passwd(md5str)+"\t"+str(statinfo.st_size)+"\n") 
    
     
     

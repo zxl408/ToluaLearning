@@ -4,92 +4,103 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.IO;
-/// <summary>
-/// 资源管理器
-/// </summary>
-public class ResManager : MonoBehaviour
+namespace Zxl.Res
 {
-    private static ResManager resManager;
-    public AssetBundleManager AssetBundleManager;
-    public LuaManager luaManager;
-    private void Awake()
-    {
-        resManager = this;
-    }
 
-    public void InitRes(System.Action<bool> onfinsh)
+    /// <summary>
+    /// 资源管理器
+    /// </summary>
+    public class ResManager : MonoBehaviour
     {
-        InitLocalCach();
-        AssetBundleManager = AssetBundleManager.Ins;
-
-        AssetBundleManager.Init((isSucess) =>
+        private static ResManager resManager;
+        public AssetBundleManager AssetBundleManager;
+        public LuaManager luaManager;
+        private void Awake()
         {
-            DownLoadLua(onfinsh);
-        });
-
-    }
-    void InitLocalCach()
-    {
-        if (!System.IO.Directory.Exists(MainGameConfig.LocalResUrl))
-        {
-            System.IO.Directory.CreateDirectory(MainGameConfig.LocalResUrl.Replace("file:///", ""));
+            DontDestroyOnLoad(gameObject);
+            resManager = this;
         }
-        if (!System.IO.Directory.Exists(MainGameConfig.LocalLuaUrl))
+
+        public void InitRes(System.Action<bool> onfinsh)
         {
-            System.IO.Directory.CreateDirectory(MainGameConfig.LocalLuaUrl.Replace("file:///", ""));
-        }
-    }
-    void DownLoadLua(System.Action<bool> onfinsh)
-    {
-        var array = AssetBundleManager.manifest.GetAllAssetBundles();
-        var list = array.ToList().FindAll((it) => it.Substring(0, 3) == "lua");
-        int count = list.Count;
-        foreach (var assetName in list)
-        {
-            AssetBundleManager.LoadLuaFile(assetName, (bundle =>
+            InitLocalCach();
+            AssetBundleManager = AssetBundleManager.Ins;
+
+            AssetBundleManager.Init((isSucess) =>
             {
-                if (bundle != null)
+                if (isSucess)
                 {
-                    Debug.LogError("assetName: "+assetName);
-                    string fielName = Path.GetFileNameWithoutExtension(assetName);
-                    print("name: " + fielName);
-                    LuaFileUtils.Instance.AddSearchBundle(fielName, bundle);
-                    count--;
-                    if (count == 0)
+                    DownLoadLua(onfinsh);
+                }
+                else {
+                    Debug.LogError("下载资源失败!!!");
+                }
+            });
+
+        }
+        void InitLocalCach()
+        {
+            if (!System.IO.Directory.Exists(MainGameConfig.LocalResPath))
+            {
+                System.IO.Directory.CreateDirectory(MainGameConfig.LocalResPath.Replace("file:///", ""));
+            }
+            if (!System.IO.Directory.Exists(MainGameConfig.LocalLuaPath))
+            {
+                System.IO.Directory.CreateDirectory(MainGameConfig.LocalLuaPath.Replace("file:///", ""));
+            }
+        }
+        void DownLoadLua(System.Action<bool> onfinsh)
+        {
+            var array = AssetBundleManager.manifest.GetAllAssetBundles();
+            var list = array.ToList().FindAll((it) => it.Substring(0, 3) == "lua");
+            int count = list.Count;
+            foreach (var assetName in list)
+            {
+                AssetBundleManager.LoadLuaFile(assetName, (bundle =>
+                {
+                    if (bundle != null)
+                    {                        
+                        string fielName = Path.GetFileNameWithoutExtension(assetName);
+                        print("name: " + fielName);
+                        LuaFileUtils.Instance.AddSearchBundle(fielName, bundle);
+                        count--;
+                        if (count == 0)
+                        {
+                            if (onfinsh != null)
+                                onfinsh(true);
+                        }
+                    }
+                    else
                     {
                         if (onfinsh != null)
-                            onfinsh(true);
+                            onfinsh(false);
                     }
-                }
-                else
-                {
-                    if (onfinsh != null)
-                        onfinsh(false);
-                }
-            }));
+                }));
+            }
         }
-    }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public static ResManager GetResManager()
-    {
-        if (resManager == null)
+        // Use this for initialization
+        void Start()
         {
-            resManager = GameObject.FindObjectOfType<ResManager>();
-            if (resManager == null)
-                resManager = (new GameObject("ResManager")).AddComponent<ResManager>();
 
         }
-        return resManager;
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+        public static ResManager GetResManager()
+        {
+            if (resManager == null)
+            {
+                resManager = GameObject.FindObjectOfType<ResManager>();
+                if (resManager == null)
+                    resManager = (new GameObject("ResManager")).AddComponent<ResManager>();
+
+            }
+            return resManager;
+        }
     }
+
 }

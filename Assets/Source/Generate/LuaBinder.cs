@@ -15,7 +15,6 @@ public static class LuaBinder
 		NewTestEventListenerWrap.Register(L);
 		TestLuaEnumWrap.Register(L);
 		TestClassAWrap.Register(L);
-		AssetBundleManagerWrap.Register(L);
 		L.BeginModule("LuaInterface");
 		LuaInterface_LuaInjectionStationWrap.Register(L);
 		LuaInterface_InjectTypeWrap.Register(L);
@@ -119,6 +118,11 @@ public static class LuaBinder
 		L.RegFunction("PCMSetPositionCallback", UnityEngine_AudioClip_PCMSetPositionCallback);
 		L.EndModule();
 		L.EndModule();
+		L.BeginModule("Zxl");
+		L.BeginModule("Res");
+		Zxl_Res_AssetBundleManagerWrap.Register(L);
+		L.EndModule();
+		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);
 		L.RegFunction("Predicate_int", System_Predicate_int);
@@ -128,7 +132,7 @@ public static class LuaBinder
 		L.RegFunction("Func_bool", System_Func_bool);
 		L.RegFunction("Action_bool", System_Action_bool);
 		L.RegFunction("Action_UnityEngine_AssetBundle", System_Action_UnityEngine_AssetBundle);
-		L.RegFunction("Action_AssetBundleItem", System_Action_AssetBundleItem);
+		L.RegFunction("Action_Zxl_Res_AssetBundleItem", System_Action_Zxl_Res_AssetBundleItem);
 		L.EndModule();
 		L.BeginModule("NewTestEventListener");
 		L.RegFunction("OnClick", NewTestEventListener_OnClick);
@@ -1314,7 +1318,7 @@ public static class LuaBinder
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int System_Action_AssetBundleItem(IntPtr L)
+	static int System_Action_Zxl_Res_AssetBundleItem(IntPtr L)
 	{
 		try
 		{
@@ -1323,13 +1327,13 @@ public static class LuaBinder
 
 			if (count == 1)
 			{
-				Delegate arg1 = DelegateTraits<System.Action<AssetBundleItem>>.Create(func);
+				Delegate arg1 = DelegateTraits<System.Action<Zxl.Res.AssetBundleItem>>.Create(func);
 				ToLua.Push(L, arg1);
 			}
 			else
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateTraits<System.Action<AssetBundleItem>>.Create(func, self);
+				Delegate arg1 = DelegateTraits<System.Action<Zxl.Res.AssetBundleItem>>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

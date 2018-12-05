@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zxl.Res;
+
 
 public class MainGame : MonoBehaviour {
     public GameObject luaGo;
@@ -19,7 +21,7 @@ public class MainGame : MonoBehaviour {
         var b = LayerMask.NameToLayer("Default");
         print("b:"+b);
         print("1<<b" + (1 << b));
-
+        GUIManager.GetIns().LoadUI("MainUI");
     }
 	
 	// Update is called once per frame

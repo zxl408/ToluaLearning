@@ -62,7 +62,7 @@ public class DelegateFactory
 		dict.Add(typeof(NewTestEventListener.VoidDelegate), factory.NewTestEventListener_VoidDelegate);
 		dict.Add(typeof(System.Action<bool>), factory.System_Action_bool);
 		dict.Add(typeof(System.Action<UnityEngine.AssetBundle>), factory.System_Action_UnityEngine_AssetBundle);
-		dict.Add(typeof(System.Action<AssetBundleItem>), factory.System_Action_AssetBundleItem);
+		dict.Add(typeof(System.Action<Zxl.Res.AssetBundleItem>), factory.System_Action_Zxl_Res_AssetBundleItem);
 
 		DelegateTraits<System.Action>.Init(factory.System_Action);
 		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
@@ -109,7 +109,7 @@ public class DelegateFactory
 		DelegateTraits<NewTestEventListener.VoidDelegate>.Init(factory.NewTestEventListener_VoidDelegate);
 		DelegateTraits<System.Action<bool>>.Init(factory.System_Action_bool);
 		DelegateTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.System_Action_UnityEngine_AssetBundle);
-		DelegateTraits<System.Action<AssetBundleItem>>.Init(factory.System_Action_AssetBundleItem);
+		DelegateTraits<System.Action<Zxl.Res.AssetBundleItem>>.Init(factory.System_Action_Zxl_Res_AssetBundleItem);
 
 		TypeTraits<System.Action>.Init(factory.Check_System_Action);
 		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
@@ -156,7 +156,7 @@ public class DelegateFactory
 		TypeTraits<NewTestEventListener.VoidDelegate>.Init(factory.Check_NewTestEventListener_VoidDelegate);
 		TypeTraits<System.Action<bool>>.Init(factory.Check_System_Action_bool);
 		TypeTraits<System.Action<UnityEngine.AssetBundle>>.Init(factory.Check_System_Action_UnityEngine_AssetBundle);
-		TypeTraits<System.Action<AssetBundleItem>>.Init(factory.Check_System_Action_AssetBundleItem);
+		TypeTraits<System.Action<Zxl.Res.AssetBundleItem>>.Init(factory.Check_System_Action_Zxl_Res_AssetBundleItem);
 
 		StackTraits<System.Action>.Push = factory.Push_System_Action;
 		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
@@ -203,7 +203,7 @@ public class DelegateFactory
 		StackTraits<NewTestEventListener.VoidDelegate>.Push = factory.Push_NewTestEventListener_VoidDelegate;
 		StackTraits<System.Action<bool>>.Push = factory.Push_System_Action_bool;
 		StackTraits<System.Action<UnityEngine.AssetBundle>>.Push = factory.Push_System_Action_UnityEngine_AssetBundle;
-		StackTraits<System.Action<AssetBundleItem>>.Push = factory.Push_System_Action_AssetBundleItem;
+		StackTraits<System.Action<Zxl.Res.AssetBundleItem>>.Push = factory.Push_System_Action_Zxl_Res_AssetBundleItem;
 	}
     
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
@@ -2920,12 +2920,12 @@ public class DelegateFactory
 		ToLua.Push(L, o);
 	}
 
-	class System_Action_AssetBundleItem_Event : LuaDelegate
+	class System_Action_Zxl_Res_AssetBundleItem_Event : LuaDelegate
 	{
-		public System_Action_AssetBundleItem_Event(LuaFunction func) : base(func) { }
-		public System_Action_AssetBundleItem_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+		public System_Action_Zxl_Res_AssetBundleItem_Event(LuaFunction func) : base(func) { }
+		public System_Action_Zxl_Res_AssetBundleItem_Event(LuaFunction func, LuaTable self) : base(func, self) { }
 
-		public void Call(AssetBundleItem param0)
+		public void Call(Zxl.Res.AssetBundleItem param0)
 		{
 			func.BeginPCall();
 			func.PushObject(param0);
@@ -2933,7 +2933,7 @@ public class DelegateFactory
 			func.EndPCall();
 		}
 
-		public void CallWithSelf(AssetBundleItem param0)
+		public void CallWithSelf(Zxl.Res.AssetBundleItem param0)
 		{
 			func.BeginPCall();
 			func.Push(self);
@@ -2943,36 +2943,36 @@ public class DelegateFactory
 		}
 	}
 
-	public System.Action<AssetBundleItem> System_Action_AssetBundleItem(LuaFunction func, LuaTable self, bool flag)
+	public System.Action<Zxl.Res.AssetBundleItem> System_Action_Zxl_Res_AssetBundleItem(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
-			System.Action<AssetBundleItem> fn = delegate(AssetBundleItem param0) { };
+			System.Action<Zxl.Res.AssetBundleItem> fn = delegate(Zxl.Res.AssetBundleItem param0) { };
 			return fn;
 		}
 
 		if(!flag)
 		{
-			System_Action_AssetBundleItem_Event target = new System_Action_AssetBundleItem_Event(func);
-			System.Action<AssetBundleItem> d = target.Call;
+			System_Action_Zxl_Res_AssetBundleItem_Event target = new System_Action_Zxl_Res_AssetBundleItem_Event(func);
+			System.Action<Zxl.Res.AssetBundleItem> d = target.Call;
 			target.method = d.Method;
 			return d;
 		}
 		else
 		{
-			System_Action_AssetBundleItem_Event target = new System_Action_AssetBundleItem_Event(func, self);
-			System.Action<AssetBundleItem> d = target.CallWithSelf;
+			System_Action_Zxl_Res_AssetBundleItem_Event target = new System_Action_Zxl_Res_AssetBundleItem_Event(func, self);
+			System.Action<Zxl.Res.AssetBundleItem> d = target.CallWithSelf;
 			target.method = d.Method;
 			return d;
 		}
 	}
 
-	bool Check_System_Action_AssetBundleItem(IntPtr L, int pos)
+	bool Check_System_Action_Zxl_Res_AssetBundleItem(IntPtr L, int pos)
 	{
-		return TypeChecker.CheckDelegateType(typeof(System.Action<AssetBundleItem>), L, pos);
+		return TypeChecker.CheckDelegateType(typeof(System.Action<Zxl.Res.AssetBundleItem>), L, pos);
 	}
 
-	void Push_System_Action_AssetBundleItem(IntPtr L, System.Action<AssetBundleItem> o)
+	void Push_System_Action_Zxl_Res_AssetBundleItem(IntPtr L, System.Action<Zxl.Res.AssetBundleItem> o)
 	{
 		ToLua.Push(L, o);
 	}

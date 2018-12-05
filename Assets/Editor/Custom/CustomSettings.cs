@@ -156,7 +156,7 @@ public static class CustomSettings
         _GT(typeof(NewTestEventListener)),
         _GT(typeof(TestLuaEnum)),
         _GT(typeof(TestClassA)),
-        _GT(typeof(AssetBundleManager)),
+        _GT(typeof(Zxl.Res.AssetBundleManager)),
 
 
     };

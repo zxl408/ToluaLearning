@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zxl.Res;
 public class Entry : MonoBehaviour
 {
     ResManager ResManager;

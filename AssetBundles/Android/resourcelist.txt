@@ -9,9 +9,10 @@ lua_system.unity3d	be97186315e8961e9f8c1b0261e2f326	12981
 lua_system_injection.unity3d	87845682b24ae02f3a68ae6515ea703b	31345
 lua_system_reflection.unity3d	f2b77ba44a0693ec6c3b636a541c2184	5317
 lua_unityengine.unity3d	22f99091b5261e9f5218c9bcd44e2bcf	78978
-game\res\temp.unity3d	08bf8854a6a28aa9c8bb16aa32ebae4f	3069342
-game\res\gui\mainui.unity3d	c975faf055a292826a7c1859aa336227	14509
-game\res\model\cube.unity3d	d149fe6fcf33c9ca629e070fa1abf073	276702
-scene\maingame.unity3d	bc8b437d6e8b26d809a53669e28e4ffd	385008
-scene\testco.unity3d	6e6f02d3890d10aa6e5a044b87776dea	141885
-scene\testloadassetbundle.unity3d	0192685969df45d4afd80e44868ab309	141244
+resourcelist.txt	bf03a9618d46f5de8c2dad29bc74ee38	0
+game/res/temp.unity3d	08bf8854a6a28aa9c8bb16aa32ebae4f	3069342
+game/res/gui/mainui.unity3d	c975faf055a292826a7c1859aa336227	14509
+game/res/model/cube.unity3d	d149fe6fcf33c9ca629e070fa1abf073	276702
+scene/maingame.unity3d	bc8b437d6e8b26d809a53669e28e4ffd	385008
+scene/testco.unity3d	6e6f02d3890d10aa6e5a044b87776dea	141885
+scene/testloadassetbundle.unity3d	0192685969df45d4afd80e44868ab309	141244
